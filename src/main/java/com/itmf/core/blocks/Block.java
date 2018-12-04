@@ -1,8 +1,10 @@
 package com.itmf.core.blocks;
 
-public abstract class Block {
+import java.io.Serializable;
 
-    private BlockType blockType;
+public class Block implements Serializable {
 
+    public byte[] signature;
+    public String test;
 
 }

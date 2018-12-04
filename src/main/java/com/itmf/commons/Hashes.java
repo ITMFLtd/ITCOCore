@@ -3,7 +3,7 @@ package com.itmf.commons;
 import com.rfksystems.blake2b.Blake2b;
 
 public final class Hashes {
-    
+
     private static final int DIGEST_256 = 256 / 8;
 
     private Hashes() {
