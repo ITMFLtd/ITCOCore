@@ -22,6 +22,17 @@
             <artifactId>snakeyaml</artifactId>
             <version>1.24-SNAPSHOT</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.i2p.crypto/eddsa -->
+        <dependency>
+            <groupId>net.i2p.crypto</groupId>
+            <artifactId>eddsa</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.rfksystems</groupId>
+            <artifactId>blake2b</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>
