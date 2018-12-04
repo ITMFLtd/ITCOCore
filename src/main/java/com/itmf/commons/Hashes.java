@@ -6,8 +6,7 @@ public final class Hashes {
 
     private static final int DIGEST_256 = 256 / 8;
 
-    private Hashes() {
-    }
+    private Hashes() {}
 
     public static byte[] digest256(byte[]... bytes) {
         return digest(DIGEST_256, bytes);

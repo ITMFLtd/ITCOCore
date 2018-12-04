@@ -1,6 +1,7 @@
 package com.itmf.core;
 
 import com.itmf.core.blocks.Block;
+import com.itmf.core.net.PacketListener;
 import com.itmf.core.store.Store;
 import com.itmf.core.utils.YamlConfiguration;
 
@@ -21,9 +22,10 @@ public class ITCOCore {
         // Initialize configuration
         YamlConfiguration config = new YamlConfiguration("config.yaml");
 
-        // Initialize block storage system
-
         // Listen for UDP
+        PacketListener packetListener = new PacketListener(1760);
+        Thread t = new Thread(packetListener);
+        t.start();
 
         // Broadcast keep alives
 
