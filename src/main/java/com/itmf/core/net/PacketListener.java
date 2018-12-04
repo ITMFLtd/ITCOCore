@@ -1,6 +1,10 @@
 package com.itmf.core.net;
 
 import com.itmf.core.ITCOCore;
+import com.itmf.core.blocks.Block;
+import org.apache.commons.lang3.NotImplementedException;
+import org.apache.commons.lang3.SerializationException;
+import org.apache.commons.lang3.SerializationUtils;
 
 import java.io.IOException;
 import java.net.DatagramPacket;
@@ -38,8 +42,28 @@ public class PacketListener implements Runnable {
                 e.printStackTrace();
             }
             ITCOCore.log.info("New packet received");
-            String received = new String(datagramPacket.getData(), 0, datagramPacket.getLength());
-            System.out.println(received);
+            Packet packet = null;
+            try {
+                packet = SerializationUtils.deserialize(datagramPacket.getData());
+            } catch (SerializationException e) {
+                ITCOCore.log.warning("Could not deserialize the received packet.");
+            }
+            if (packet == null || !packet.verifyHeader()) {
+                ITCOCore.log.warning("Throwing away invalid packet");
+                continue;
+            }
+            switch (packet.getPacketType()) {
+                case PUBLISH:
+                    PacketPublish packetPublish = (PacketPublish) packet;
+                    if (!packetPublish.getBlock().verifyBlock()) {
+                        ITCOCore.log.warning("Received malformed or malicious publish packet");
+                        continue;
+                    }
+                case KEEP_ALIVE:
+                    throw new NotImplementedException("");
+                case CONFIRM_ACK:
+                    throw new NotImplementedException("");
+            }
         }
     }
 }

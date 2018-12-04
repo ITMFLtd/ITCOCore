@@ -55,14 +55,14 @@ public final class ED25519 {
     private ED25519() {
     }
 
-    static byte[] createPublicKey(byte[] privateKey) {
+    public static byte[] createPublicKey(byte[] privateKey) {
         checkKey(privateKey);
         EdDSAPrivateKeySpec key = new EdDSAPrivateKeySpec(privateKey, ED25519_BLAKE2B_CURVES_PEC);
         return key.getA().toByteArray();
     }
 
 
-    static byte[] sign(byte[] hash, byte[] privateKey) {
+    public static byte[] sign(byte[] hash, byte[] privateKey) {
         checkHash(hash);
         checkKey(privateKey);
         try {
@@ -78,7 +78,7 @@ public final class ED25519 {
         }
     }
 
-    static boolean verify(byte[] signature, byte[] hash, byte[] publicKey) {
+    public static boolean verify(byte[] signature, byte[] hash, byte[] publicKey) {
         checkSignature(signature);
         checkKey(publicKey);
         try {
